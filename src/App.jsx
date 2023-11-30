@@ -1,10 +1,8 @@
 import { useState } from 'react'
 import './App.css'
+import { TURNS, WINNER_COMBOS} from "./constants"
 
-const TURNS = {
-  X: "x",
-  O: "o"
-}
+
 
 
 const Square = ({ children, isSelected, updateBoard, index }) => {
@@ -28,13 +26,15 @@ function App() {
   console.log(board);
 
   const [turn, setTurn] = useState(TURNS.X)
+  const [winner, serWinner] = useState(null)
 
   const updateBoard = (index) => {
-    
+      //no sobreescribir el board
+      if (board[index]) return
       const newBoard = [...board]
       newBoard[index] = turn
       setBoard(newBoard)
-
+      // cambiar el turno 
       const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X
       setTurn(newTurn)
   }
